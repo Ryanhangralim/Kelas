@@ -3,15 +3,8 @@
 
 int main()
 {
-    char band[4]={"Bocchi", "Ikuyo", "Ryo", "Nijika"};
-    
-    //Changing "Ikuyo" to "Kita"
-    band[1]="Kita";
-
-    for(char member:band)
-    {
-        printf("%s\n",member);
-    }
-
+int head, tails = 0;
+printf("%d", head);
+printf("%d", tails);
     return 0;
 }
