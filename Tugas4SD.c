@@ -3,51 +3,59 @@
 
 struct data
 {
-    char norek[50];
+    int nomor;
     char nama[50];
-    char nominal[50];
+    int usia;
+    char alamat[100];
 };
-
-int head, tails = 0;
 
 int main()
 {
     int maks;
-    printf("Ketik Jumlah maksimum antrian: ");
-    scanf("%d",&maks);
+    int head = 0;
+    int tails = 0;
+    printf("Ketik jumlah maksimum antrian: ");
+    scanf("%d", &maks);
     getchar();
 
-    struct data nasabah[maks];
+    maks = maks + 1;
+    struct data pemilih[maks];
 
-    int pilihan;
-    char ch;
 
-    while (1)
+    while(1)
     {
     menu:
+        char ch,choice;
+        int pilihan;
+
         printf("\nMenu:");
-        printf("\n1.Tambah antrian\n2.Proses antrian\n3.Lihat antrian\n4.Keluar");
+        printf("\n1.Tambah Data Pemilih\n2.Panggil Pemilih\n3.Lihat Pemilih\n4.Keluar");
         printf("\n\nPilihan: ");
         scanf("%d", &pilihan);
         getchar();
+
         switch (pilihan)
         {
         case 1:
+            //tambah data
             system("cls");
-
-            if (maks==tails-head)
+            if(((tails<head)&&(tails-head==1-maks))||(tails>head)&&(tails-head==maks-1))
             {
-                printf("\nAntrian Penuh");
+                printf("Antrian Penuh");
             }
             else
             {
-                printf("Ketik data nasabah\n");
-                printf("Ketik No.Rekening:");
-                gets(nasabah[tails].norek);
-                printf("Ketik Nama:");
-                gets(nasabah[tails].nama);
-                printf("Ketik Nominal transaksi:");
-                gets(nasabah[tails].nominal);
+                printf("Ketik data pemilih\n");
+                printf("Ketik nomor pemilih:");
+                scanf("%d",&pemilih[tails%maks].nomor);
+                getchar();
+                printf("Ketik nama:");
+                gets(pemilih[tails%maks].nama);
+                printf("Ketik usia:");
+                scanf("%d",&pemilih[tails%maks].usia);
+                getchar();
+                printf("Ketik alamat:");
+                gets(pemilih[tails%maks].alamat);
                 tails = tails + 1;
 
                 printf("Apakah anda ingin kembali ke menu utama? (y/n)");
@@ -63,33 +71,31 @@ int main()
                 else{
                     printf("Pilihan salah");
                 } 
-            
             }
-
             break;
+
         case 2:
+            //panggil pemlih
             system("cls");
-
-            char choice;
-
-            if (tails == 0)
+            if(head==tails)
             {
-                printf("\nAntrian Kosong");
+                printf("Antrian Kosong");
             }
             else
             {
-            printf("Data nasabah yang akan diproses:\n");
-            printf("No. Rekening: %s\n", nasabah[head].norek);
-            printf("Nama: %s\n", nasabah[head].nama);
-            printf("Nominal transaksi: %s\n", nasabah[head].nominal);
-            printf("Apakah anda yakin (y/n)?");
-            scanf("%c", &choice);
+            printf("Pemilih yang akan dipanggil:\n");
+            printf("Nomor Pemilih: %d\n",pemilih[head%maks].nomor);
+            printf("Nama: %s\n", pemilih[head%maks].nama);
+            printf("Usia: %d\n",pemilih[head%maks].usia);
+            printf("Alamat: %s\n",pemilih[head%maks].alamat);
+            printf("Apakah anda yakin?(y/n)");
+            scanf("%c",&choice);
             getchar();
 
-            if(choice == 'y')
+            if(choice == 'y'||choice == 'Y')
             {
-            head = head + 1;
-            printf("Data telah dihapus\n");
+                head = head + 1;
+                printf("Pemilih telah dipanggil\n");
 
                 printf("Apakah anda ingin kembali ke menu utama? (y/n)");
                 scanf("%c", &ch);
@@ -105,14 +111,15 @@ int main()
                     printf("Pilihan salah");
                 }
             }
-            else if(choice == 'n')
+            else if(choice == 'n'||choice=='N')
             {
-            printf("Data tidak dihapus");
+                printf("Pemilih tidak dipanggil\n");
+
                 printf("Apakah anda ingin kembali ke menu utama? (y/n)");
                 scanf("%c", &ch);
                 getchar();
 
-               if(ch =='y'||ch =='Y'){
+                if(ch =='y'||ch =='Y'){
                     goto menu;
                 }
                 else if(ch=='n'||ch=='N'){
@@ -122,13 +129,15 @@ int main()
                     printf("Pilihan salah");
                 }
             }
-            else{
-            printf("Pilihan tidak valid");
+            else
+            {
+                printf("Pilihan tidak valid");
+
                 printf("Apakah anda ingin kembali ke menu utama? (y/n)");
                 scanf("%c", &ch);
                 getchar();
 
-             if(ch =='y'||ch =='Y'){
+                if(ch =='y'||ch =='Y'){
                     goto menu;
                 }
                 else if(ch=='n'||ch=='N'){
@@ -136,33 +145,35 @@ int main()
                 }
                 else{
                     printf("Pilihan salah");
-                } 
+                }
             }
             }
-
             break;
+
         case 3:
+            //lihat pemilih
             system("cls");
-            if (head == tails)
+            if(head==tails)
             {
-                printf("\nAntrian Kosong");
+                printf("Antrian Kosong");
             }
             else
             {
                 int j = 0;
-                printf("\nData dalam Antrian: \n");
-                printf("No\tNo.Rek\t\t\tNama\t\tNominal");
-                for (int i = head; i < tails; i++)
-                {
-                    printf("\n%d\t%s\t\t%s\t\t\t%s", j+1 , nasabah[i].norek, nasabah[i].nama, nasabah[i].nominal);
-                    j++;
-                }
-                printf("\n");
-                printf("Apakah anda ingin kembali ke menu utama? (y/n)");
+                printf("Antrian pemilih:\n");
+                printf("No\tNomor Pemilih\tNama\t\t\tUsia\tAlamat");
+
+                    for (int i = head; i<tails; i++)
+                    { 
+                        printf("\n%d\t%d\t\t%s\t\t%d\t%s", j+1, pemilih[i%maks].nomor, pemilih[i%maks].nama, pemilih[i%maks].usia, pemilih[i%maks].alamat);
+                        j++;
+                    }
+
+                printf("\nApakah anda ingin kembali ke menu utama? (y/n)");
                 scanf("%c", &ch);
                 getchar();
 
-               if(ch =='y'||ch =='Y'){
+                if(ch =='y'||ch =='Y'){
                     goto menu;
                 }
                 else if(ch=='n'||ch=='N'){
@@ -171,16 +182,20 @@ int main()
                 else{
                     printf("Pilihan salah");
                 }
+
             }
-
             break;
+
         case 4:
+            //keluar
             exit(0);
-
+        
         default:
-            printf("\nPilihan Salah");
+            printf("Pilihan salah");
+            break;
         }
-    }
 
+    }
     return 0;
 }
+

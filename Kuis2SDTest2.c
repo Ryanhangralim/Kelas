@@ -4,7 +4,7 @@
 struct data
 {
     char judul[50];
-    char penerbit[50];
+    char kode[50];
     int halaman;
 };
 
@@ -26,7 +26,7 @@ int main()
     {
     menu:
         printf("\nMenu:");
-        printf("\n1.Tambah Data\n2.Ambil Data\n3.Lihat Data\n4.Keluar");
+        printf("\n1.Tambah Buku\n2.Ambil Buku\n3.Lihat Data Buku\n4.Keluar");
         printf("\n\nPilihan: ");
         scanf("%d", &pilihan);
         getchar();
@@ -43,10 +43,10 @@ int main()
             {
                 top = top + 1;
                 printf("Ketik data buku\n");
+                printf("Ketik Kode:");
+                gets(buku[top].kode);
                 printf("Ketik Judul:");
                 gets(buku[top].judul);
-                printf("Ketik Penerbit:");
-                gets(buku[top].penerbit);
                 printf("Ketik Jumlah halaman:");
                 scanf("%d", &buku[top].halaman);
                 getchar();
@@ -76,13 +76,13 @@ int main()
 
             if (top == -1)
             {
-                printf("\nStack Underflow");
+                printf("\nStack Kosong");
             }
             else
             {
             printf("Data yang akan dihapus:\n");
+            printf("Kode: %s\n", buku[top].kode);
             printf("Judul: %s\n",buku[top].judul);
-            printf("Penerbit: %s\n", buku[top].penerbit);
             printf("Jumlah halaman: %d\n", buku[top].halaman);
             printf("Apakah anda yakin (y/n)?");
             scanf("%c", &choice);
@@ -110,7 +110,7 @@ int main()
             }
             else if(choice == 'n')
             {
-            printf("Data tidak dihapus");
+            printf("Data tidak dihapus\n");
                 char ch;
                 printf("Apakah anda ingin kembali ke menu utama? (y/n)");
                 scanf("%c", &ch);
@@ -155,11 +155,11 @@ int main()
             else
             {
                 printf("\nData dalam stack: \n");
-                printf("No\tJudul\t\tPenerbit\tHal");
+                printf("No\tKode\tJudul\t\tHal");
                 int j = 1;
                 for (int i = 0; i <= top; i++)
                 {
-                    printf("\n%d\t%s\t\t%s\t\t%d", i+1 , buku[i].judul, buku[i].penerbit, buku[i].halaman);
+                    printf("\n%d\t%s\t%s\t\t%d", i+1 , buku[i].kode,  buku[i].judul, buku[i].halaman);
                     j=j+1;
                 }
                 printf("\n");
