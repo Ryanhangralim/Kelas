@@ -1,1 +1,1 @@
-nt i = head; i<tails; i++
+-
