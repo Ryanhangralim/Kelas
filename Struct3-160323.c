@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct data{
+typedef struct{
     char judul[50];
     char penerbit[50];
     int halaman;
@@ -13,6 +13,7 @@ int main()
 
     printf("Ketik Jumlah Buku: ");
     scanf("%d", &x);
+    getchar();
 
     data buku[x];
 
@@ -20,13 +21,12 @@ int main()
     {
         printf("Ketik Data Buku %d : \n", i+1);
         printf("Masukkan judul buku: ");
-        fflush(stdin);
         gets(buku[i].judul);
         printf("Masukkan Penerbit Buku: ");
-        fflush(stdin);
         gets(buku[i].penerbit);
         printf("Masukkan Jumlah Halaman buku: ");
         scanf("%d", &buku[i].halaman);
+        getchar();
         printf("\n");
     }
   
