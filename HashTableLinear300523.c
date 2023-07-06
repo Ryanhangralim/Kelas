@@ -7,14 +7,14 @@
 int fungsi(int x, int y)
 {
     int res;
-    res = (x+y)%y;
+    res = x%y;
     return res;
 }
 
-int fungsiresolusi(int x, int i)
+int fungsiresolusi(int x, int i, int y)
 {
     int res;
-    res = x+i;
+    res = (x+i)%y;
     return res;
 }
 
@@ -53,7 +53,7 @@ data:
         printf("Data %d: ", i+1);
         scanf("%d", &data[0][i]);
     }
-    //mengisi baris mod
+    //mengisi baris mod/hash
     for(int i = 0; i<jumlahdata; i++)
     {
         data[1][i]=fungsi(data[0][i],index);
@@ -72,9 +72,9 @@ data:
         {
             while(indicator==false)
             {
-                if(linear[fungsiresolusi(k,counter)]==0)
+                if(linear[fungsiresolusi(k,counter,index)]==0)
                 {
-                    linear[fungsiresolusi(k,counter)]=data[0][i];
+                    linear[fungsiresolusi(k,counter,index)]=data[0][i];
                     indicator=true;
                 }
                 else{
@@ -86,7 +86,7 @@ data:
     printf("Data Hash\n");
     for(int i = 0; i<jumlahdata; i++)
     {
-        printf("%d %d %d\n", data[0][i], data[1][i]);
+        printf("%d %d\n", data[0][i], data[1][i]);
     }
     printf("\nLinear\n");
     for(int i = 0; i<index; i++)

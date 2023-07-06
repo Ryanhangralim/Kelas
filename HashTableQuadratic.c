@@ -8,7 +8,7 @@
 int fungsi(int x, int y)
 {
     int res;
-    res = (x+y)%y;
+    res = x%y;
     return res;
 }
 
@@ -98,7 +98,7 @@ data:
     printf("Data Hash\n");
     for(int i = 0; i<jumlahdata; i++)
     {
-        printf("%d %d %d\n", data[0][i], data[1][i]);
+        printf("%d %d\n", data[0][i], data[1][i]);
     }
     printf("\nquadratic\n");
     for(int i = 0; i<index; i++)
